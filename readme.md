@@ -9,8 +9,6 @@
 
 * Keras2 + TF used for the recent updates, which might cause with some confilict from previous version I had in here
 
-Hello!
-
 What is The One Hundred Layers Tiramisu?
 
 * A state of art (as in Jan 2017) Semantic Pixel-wise Image Segmentation model that consists of a fully deep convolutional blocks with downsampling, skip-layer then to Upsampling architecture.

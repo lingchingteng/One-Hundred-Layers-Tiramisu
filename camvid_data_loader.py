@@ -1,12 +1,11 @@
-from __future__ import absolute_import
-from __future__ import print_function
+from __future__ import absolute_import, print_function
+
+import os
 
 import cv2
 import numpy as np
-import itertools
 
-from helper import *
-import os
+from helper import normalized, one_hot_it
 
 # Copy the data to this dir here in the SegNet project /CamVid from here:
 # https://github.com/alexgkendall/SegNet-Tutorial
@@ -18,28 +17,35 @@ data_shape = 224*224
 def load_data(mode):
     data = []
     label = []
-    with open(DataPath + mode +'.txt') as f:
+    with open(DataPath + mode + '.txt') as f:
         txt = f.readlines()
         txt = [line.split(' ') for line in txt]
     for i in range(len(txt)):
-        # data.append(np.rollaxis(normalized(cv2.imread(os.getcwd() + txt[i][0][7:])),2))
+        # data.append(
+        #     np.rollaxis(
+        #         normalized(cv2.imread(os.getcwd() + txt[i][0][7:])), 2))
         # this load cropped images
-        data.append(np.rollaxis(normalized(cv2.imread(os.getcwd() + txt[i][0][7:])[136:,256:]),2))
-        label.append(one_hot_it(cv2.imread(os.getcwd() + txt[i][1][7:][:-1])[136:,256:][:,:,0],224,224))
-        print('.',end='')
+        data.append(
+            np.rollaxis(
+                normalized(
+                    cv2.imread(os.getcwd() + txt[i][0][7:])[136:, 256:]), 2))
+        label.append(
+            one_hot_it(
+                cv2.imread(os.getcwd() + txt[i][1][7:][:-1])
+                [136:, 256:][:, :, 0], 224, 224))
+
+        print('.', end='')
     return np.array(data), np.array(label)
 
 
-
 train_data, train_label = load_data("train")
-train_label = np.reshape(train_label,(367,data_shape,12))
+train_label = np.reshape(train_label, (367, data_shape, 12))
 
 test_data, test_label = load_data("test")
-test_label = np.reshape(test_label,(233,data_shape,12))
+test_label = np.reshape(test_label, (233, data_shape, 12))
 
 val_data, val_label = load_data("val")
-val_label = np.reshape(val_label,(101,data_shape,12))
-
+val_label = np.reshape(val_label, (101, data_shape, 12))
 
 np.save("data/train_data", train_data)
 np.save("data/train_label", train_label)
