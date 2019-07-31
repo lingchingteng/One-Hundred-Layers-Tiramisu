@@ -9,10 +9,11 @@
 
 * Keras2 + TF used for the recent updates, which might cause with some confilict from previous version I had in here
 
+Hello!
 
 What is The One Hundred Layers Tiramisu?
 
-* A state of art (as in Jan 2017) Semantic Pixel-wise Image Segmentation model that consists of a fully deep convolutional blocks with downsampling, skip-layer then to Upsampling architecture. 
+* A state of art (as in Jan 2017) Semantic Pixel-wise Image Segmentation model that consists of a fully deep convolutional blocks with downsampling, skip-layer then to Upsampling architecture.
 * An extension of DenseNets to deal with the problem of semantic segmentation.
 
  **Fully Convolutional DensNet** = **(Dense Blocks + Transition Down Blocks)** + **(Bottleneck Blocks)** + **(Dense Blocks + Transition Up Blocks)** +  **Pixel-Wise Classification** layer
@@ -22,7 +23,7 @@ What is The One Hundred Layers Tiramisu?
 
 
 ##### *[The One Hundred Layers Tiramisu: Fully Convolutional DenseNets for Semantic Segmentation (Simon Jégou, Michal Drozdzal, David Vazquez, Adriana Romero, Yoshua Bengio) arXiv:1611.09326 cs.CV](https://arxiv.org/abs/1611.09326)*
- 	
+
 #### Requirements:
 -----
 
@@ -33,13 +34,13 @@ What is The One Hundred Layers Tiramisu?
 #### Model Strucure:
 -----
 
-* DenseBlock: 
-	`BatchNormalization` + `Activation [ Relu ]` + `Convolution2D` + `Dropout` 
+* DenseBlock:
+	`BatchNormalization` + `Activation [ Relu ]` + `Convolution2D` + `Dropout`
 
-* TransitionDown: 
+* TransitionDown:
 	`BatchNormalization` + `Activation [ Relu ]` + `Convolution2D` + `Dropout` + `MaxPooling2D`
 
-* TransitionUp: 
+* TransitionUp:
 	`Deconvolution2D` (Convolutions Transposed)
 
  ![model-blocks](./imgs/tiramisu-blocks.png)
@@ -75,7 +76,7 @@ What is The One Hundred Layers Tiramisu?
 	* `git clone git@github.com:alexgkendall/SegNet-Tutorial.git`
 	* copy the `/CamVid` to here, or change the `DataPath` in `data_loader.py` to the above directory
 2. The run `python data_loader.py` to generate these two files:
-	
+
 	* `/data/train_data.npz/` and `/data/train_label.npz`
 	* This will make it easy to process the model over and over, rather than waiting the data to be loaded into memory.
 
@@ -85,8 +86,8 @@ What is The One Hundred Layers Tiramisu?
 
 * Experiments:
 
-	  
-	  
+
+
 | Models        | Acc           | Loss  | Notes |
 | ------------- |:-------------:| -----:|-------|
 | FC-DenseNet 67| ![model-results](./imgs/tiramisu-67-model-acc.png) | ![model-results](./imgs/tiramisu-67-model-loss.png) | 150 Epochs, RMSPROP
@@ -107,4 +108,3 @@ What is The One Hundred Layers Tiramisu?
 	 ![model-results](./imgs/original-result-table.png)
 
 
-	
